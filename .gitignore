@@ -1,0 +1,29 @@
+# 遥遥领先的一天 - Git Ignore
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+*.tmp
+*.temp
+.cache/
+
+# 日志文件
+*.log
+
+# 本地环境配置
+.env
+.env.local
+
+# 构建输出（如果有）
+dist/
+build/

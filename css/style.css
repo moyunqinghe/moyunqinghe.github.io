@@ -1,0 +1,878 @@
+/* ==================== 
+   遥遥领先的一天 - 主样式表
+   ==================== */
+
+/* CSS 变量 */
+:root {
+    /* 土味配色 */
+    --color-magenta: #FF00FF;
+    --color-cyan: #00FFFF;
+    --color-yellow: #FFFF00;
+    --color-green: #00FF00;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --color-gray: #333333;
+    --color-dark-bg: #1a1a2e;
+    
+    /* XP草地色 */
+    --color-xp-green: #3a6ea5;
+    --color-xp-sky: #87CEEB;
+    
+    /* 字体 */
+    --font-main: 'Noto Sans SC', 'Microsoft YaHei', '微软雅黑', 'Comic Sans MS', sans-serif;
+    
+    /* 间距 */
+    --section-padding: 100px 20px;
+    --card-gap: 30px;
+    
+    /* 动画时长 */
+    --transition-fast: 0.2s;
+    --transition-normal: 0.4s;
+    --transition-slow: 0.8s;
+}
+
+/* 重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ==================== 通用 Section 样式 ==================== */
+.section {
+    min-height: 100vh;
+    padding: var(--section-padding);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    z-index: 10;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-shadow: 
+        3px 3px 0 var(--color-magenta),
+        -3px -3px 0 var(--color-cyan),
+        6px 6px 0 rgba(0,0,0,0.3);
+    animation: rainbow-text 3s linear infinite;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-cyan);
+    font-style: italic;
+}
+
+/* ==================== BGM 控制按钮 ==================== */
+.bgm-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#bgm-toggle {
+    background: linear-gradient(135deg, var(--color-magenta), var(--color-cyan));
+    border: 3px solid var(--color-yellow);
+    color: var(--color-white);
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    transition: all var(--transition-fast);
+}
+
+#bgm-toggle:hover {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 0 20px var(--color-magenta);
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    position: relative;
+}
+
+.hero-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, var(--color-magenta) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--color-cyan) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, var(--color-yellow) 0%, transparent 40%);
+    opacity: 0.3;
+    animation: bg-pulse 4s ease-in-out infinite;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 10;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.title-line {
+    display: block;
+    animation: glitch-text 2s infinite;
+}
+
+.title-line:nth-child(1) {
+    color: var(--color-yellow);
+    text-shadow: 
+        5px 5px 0 var(--color-magenta),
+        10px 10px 0 rgba(255,0,255,0.3);
+}
+
+.title-line:nth-child(2) {
+    color: var(--color-cyan);
+    font-size: 0.6em;
+    animation-delay: 0.2s;
+}
+
+.title-line:nth-child(3) {
+    color: var(--color-magenta);
+    text-shadow: 
+        5px 5px 0 var(--color-yellow),
+        10px 10px 0 rgba(255,255,0,0.3);
+    animation-delay: 0.4s;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--color-cyan);
+    margin-bottom: 30px;
+    animation: blink 1s step-end infinite;
+}
+
+.hero-badges {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: linear-gradient(135deg, var(--color-magenta), var(--color-cyan));
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid var(--color-white);
+    animation: float 3s ease-in-out infinite;
+}
+
+.badge:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.badge:nth-child(3) {
+    animation-delay: 1s;
+}
+
+/* 滚动指示器 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+}
+
+.scroll-text {
+    font-size: 1rem;
+    color: var(--color-yellow);
+    margin-bottom: 10px;
+    animation: blink 1s step-end infinite;
+}
+
+.scroll-arrow {
+    font-size: 3rem;
+    animation: bounce 1s infinite;
+}
+
+/* ==================== 起床 Section ==================== */
+.wakeup {
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+}
+
+.wakeup-content {
+    text-align: center;
+    z-index: 10;
+}
+
+.alarm-clock {
+    margin-bottom: 40px;
+}
+
+.clock-face {
+    width: 200px;
+    height: 200px;
+    border: 10px solid var(--color-yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    background: var(--color-black);
+    box-shadow: 
+        0 0 30px var(--color-yellow),
+        inset 0 0 30px rgba(255,255,0,0.2);
+}
+
+.clock-time {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-yellow);
+    text-shadow: 0 0 10px var(--color-yellow);
+}
+
+.alarm-emoji {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.emoji-item {
+    animation: shake 0.5s infinite;
+}
+
+.emoji-item:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.wakeup-quote {
+    font-size: 1.5rem;
+    color: var(--color-cyan);
+    font-style: italic;
+    padding: 20px;
+    border-left: 5px solid var(--color-magenta);
+    background: rgba(255,255,255,0.05);
+    border-radius: 0 10px 10px 0;
+}
+
+/* ==================== 战绩 Section ==================== */
+.achievements {
+    background: linear-gradient(to bottom, #0d7377, #14a085);
+    position: relative;
+    padding: 80px 20px;
+}
+
+.achievements-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+
+.achievements-container {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    z-index: 10;
+}
+
+.achievement-card {
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(20,20,40,0.9));
+    border: 3px solid var(--color-yellow);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all var(--transition-normal);
+}
+
+.achievement-card:nth-child(even) {
+    transform: translateX(100px);
+    border-color: var(--color-magenta);
+}
+
+.achievement-card.animate {
+    opacity: 1;
+    transform: translateX(0);
+    animation: card-entrance 0.8s ease-out forwards;
+}
+
+.achievement-card:hover {
+    transform: scale(1.02) rotate(-1deg);
+    box-shadow: 
+        0 10px 40px rgba(255,255,0,0.3),
+        0 0 60px rgba(255,0,255,0.2);
+}
+
+.achievement-card:nth-child(even):hover {
+    transform: scale(1.02) rotate(1deg);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: var(--color-yellow);
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0 var(--color-magenta);
+}
+
+.card-content {
+    color: var(--color-white);
+}
+
+.highlight {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-cyan);
+    margin-bottom: 10px;
+}
+
+.detail {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.detail.quote {
+    color: var(--color-yellow);
+    font-style: italic;
+}
+
+.detail.os {
+    color: var(--color-magenta);
+    font-size: 0.9rem;
+}
+
+.detail.secret {
+    color: var(--color-green);
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.detail.signature {
+    color: var(--color-cyan);
+    border-bottom: 2px dashed var(--color-magenta);
+    display: inline-block;
+}
+
+.detail.prompt-text {
+    background: var(--color-gray);
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    border-left: 4px solid var(--color-green);
+}
+
+.cost-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cost-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+}
+
+.cost-list .label {
+    color: var(--color-yellow);
+    font-weight: bold;
+}
+
+.cost-list .value {
+    color: var(--color-magenta);
+    font-style: italic;
+}
+
+/* 终极战绩特殊样式 */
+.final-card {
+    border-color: var(--color-cyan);
+    background: linear-gradient(135deg, 
+        rgba(255,0,255,0.2), 
+        rgba(0,255,255,0.2),
+        rgba(255,255,0,0.2));
+}
+
+.final-card .card-title {
+    color: var(--color-magenta);
+    font-size: 1.8rem;
+    animation: rainbow-text 2s linear infinite;
+}
+
+.response {
+    color: var(--color-yellow);
+    font-weight: bold;
+    animation: blink 1s step-end infinite;
+}
+
+/* 蚌埠住了特效 */
+.bangbu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.bangbu-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.bangbu-text {
+    font-size: clamp(3rem, 15vw, 10rem);
+    font-weight: 900;
+    color: var(--color-yellow);
+    text-shadow: 
+        5px 5px 0 var(--color-magenta),
+        10px 10px 0 var(--color-cyan),
+        15px 15px 0 rgba(0,0,0,0.5);
+    animation: shake 0.3s infinite, rainbow-text 1s linear infinite;
+}
+
+.bangbu-emoji {
+    font-size: clamp(5rem, 20vw, 15rem);
+    animation: bounce 0.5s infinite;
+}
+
+/* ==================== 下班后 Section ==================== */
+.afterwork {
+    background: linear-gradient(to bottom, #16213e, #0f3460);
+    position: relative;
+}
+
+.afterwork::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+}
+
+.afterwork-content {
+    z-index: 10;
+    text-align: center;
+}
+
+.mood-board {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.mood-item {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.mood-item.animate {
+    animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.mood-item:nth-child(2).animate {
+    animation-delay: 0.2s;
+}
+
+.mood-item:nth-child(3).animate {
+    animation-delay: 0.4s;
+}
+
+.mood-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.mood-text {
+    font-size: 1.2rem;
+    color: var(--color-cyan);
+}
+
+.afterwork-quote {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    border: 2px dashed var(--color-magenta);
+}
+
+.afterwork-quote p {
+    margin-bottom: 15px;
+}
+
+.sub-quote {
+    font-size: 1rem;
+    color: var(--color-yellow);
+    font-style: italic;
+}
+
+/* ==================== 结尾 Section ==================== */
+.ending {
+    background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+
+.ending-content {
+    text-align: center;
+    z-index: 10;
+    max-width: 800px;
+    width: 100%;
+}
+
+.ending-title {
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: var(--color-yellow);
+    margin-bottom: 50px;
+    text-shadow: 
+        3px 3px 0 var(--color-magenta),
+        6px 6px 0 rgba(0,0,0,0.5);
+}
+
+/* 时间统计 */
+.time-stats {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    border: 2px solid var(--color-cyan);
+}
+
+.stats-title {
+    font-size: 1.2rem;
+    color: var(--color-cyan);
+    margin-bottom: 15px;
+}
+
+.time-counter {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-magenta);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 20px var(--color-magenta);
+    margin-bottom: 10px;
+}
+
+.stats-hint {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+/* 薪资按钮 */
+.salary-trick {
+    margin-bottom: 40px;
+}
+
+.salary-btn {
+    background: linear-gradient(135deg, var(--color-green), #00cc00);
+    border: 3px solid var(--color-white);
+    color: var(--color-black);
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all var(--transition-fast);
+    box-shadow: 0 5px 20px rgba(0,255,0,0.4);
+}
+
+.salary-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0,255,0,0.6);
+}
+
+/* 薪资弹窗 */
+.salary-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1500;
+}
+
+.salary-modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e, #302b63);
+    padding: 40px;
+    border-radius: 20px;
+    border: 3px solid var(--color-yellow);
+    text-align: center;
+    position: relative;
+    max-width: 400px;
+    width: 90%;
+    animation: pop-in 0.3s ease-out;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-cyan);
+}
+
+.close-btn:hover {
+    color: var(--color-magenta);
+}
+
+.modal-content h3 {
+    color: var(--color-yellow);
+    margin-bottom: 20px;
+}
+
+.salary-amount {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-magenta);
+    margin-bottom: 10px;
+}
+
+.salary-note {
+    color: var(--color-cyan);
+    font-style: italic;
+}
+
+/* 假二维码 */
+.fake-qr {
+    margin-bottom: 40px;
+}
+
+.qr-code {
+    display: inline-block;
+    padding: 20px;
+    background: var(--color-white);
+    border-radius: 10px;
+}
+
+.qr-pattern {
+    width: 150px;
+    height: 150px;
+    background: 
+        repeating-linear-gradient(0deg, #000 0, #000 10px, transparent 10px, transparent 20px),
+        repeating-linear-gradient(90deg, #000 0, #000 10px, transparent 10px, transparent 20px);
+    background-size: 20px 20px;
+    margin: 0 auto 15px;
+    position: relative;
+}
+
+.qr-pattern::before,
+.qr-pattern::after {
+    content: '';
+    position: absolute;
+    border: 10px solid #000;
+}
+
+.qr-pattern::before {
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.qr-pattern::after {
+    bottom: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.qr-text {
+    color: var(--color-black);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* 烟花容器 */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* 底部信息 */
+.footer-info {
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-info p {
+    margin-bottom: 10px;
+    color: var(--color-gray);
+}
+
+.copyright {
+    font-size: 0.9rem;
+}
+
+.social-links {
+    margin-top: 15px;
+}
+
+.social-link {
+    color: var(--color-cyan);
+    text-decoration: none;
+    padding: 5px 15px;
+    border: 2px solid var(--color-cyan);
+    border-radius: 20px;
+    transition: all var(--transition-fast);
+}
+
+.social-link:hover {
+    background: var(--color-cyan);
+    color: var(--color-black);
+}
+
+/* 回到顶部按钮 */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--color-magenta), var(--color-cyan));
+    border: 3px solid var(--color-yellow);
+    color: var(--color-white);
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    z-index: 999;
+    transition: all var(--transition-fast);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px var(--color-magenta);
+}
+
+.back-to-top.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==================== 响应式适配 ==================== */
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 15px;
+    }
+    
+    .hero-badges {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .badge {
+        width: 80%;
+        text-align: center;
+    }
+    
+    .mood-board {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .achievement-card {
+        padding: 20px;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    .highlight {
+        font-size: 1rem;
+    }
+    
+    .alarm-emoji {
+        font-size: 1.2rem;
+    }
+    
+    .back-to-top {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

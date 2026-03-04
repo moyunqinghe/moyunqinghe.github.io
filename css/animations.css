@@ -1,0 +1,619 @@
+/* ==================== 
+   遥遥领先的一天 - 动画样式表
+   ==================== */
+
+/* ==================== 关键帧动画定义 ==================== */
+
+/* 彩虹文字渐变动画 */
+@keyframes rainbow-text {
+    0% { color: #FF00FF; }
+    14% { color: #FF00FF; }
+    28% { color: #00FFFF; }
+    42% { color: #00FF00; }
+    57% { color: #FFFF00; }
+    71% { color: #FF8800; }
+    85% { color: #FF0000; }
+    100% { color: #FF00FF; }
+}
+
+/* 背景脉动 */
+@keyframes bg-pulse {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+}
+
+/* Glitch 故障效果 */
+@keyframes glitch-text {
+    0%, 100% {
+        text-shadow: 
+            3px 3px 0 #FF00FF,
+            -3px -3px 0 #00FFFF;
+    }
+    25% {
+        text-shadow: 
+            -3px 3px 0 #FF00FF,
+            3px -3px 0 #00FFFF;
+    }
+    50% {
+        text-shadow: 
+            3px -3px 0 #FF00FF,
+            -3px 3px 0 #00FFFF;
+    }
+    75% {
+        text-shadow: 
+            -3px -3px 0 #FF00FF,
+            3px 3px 0 #00FFFF;
+    }
+}
+
+/* 闪烁效果 */
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.3; }
+}
+
+/* 悬浮效果 */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 弹跳效果 */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* 摇晃效果 */
+@keyframes shake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    10% { transform: translateX(-5px) rotate(-2deg); }
+    20% { transform: translateX(5px) rotate(2deg); }
+    30% { transform: translateX(-5px) rotate(-2deg); }
+    40% { transform: translateX(5px) rotate(2deg); }
+    50% { transform: translateX(-3px) rotate(-1deg); }
+    60% { transform: translateX(3px) rotate(1deg); }
+    70% { transform: translateX(-2px) rotate(-1deg); }
+    80% { transform: translateX(2px) rotate(1deg); }
+    90% { transform: translateX(-1px) rotate(0deg); }
+}
+
+/* 剧烈摇晃 */
+@keyframes shake-hard {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-10px, -5px) rotate(-5deg); }
+    20% { transform: translate(10px, 5px) rotate(5deg); }
+    30% { transform: translate(-10px, 5px) rotate(-5deg); }
+    40% { transform: translate(10px, -5px) rotate(5deg); }
+    50% { transform: translate(-5px, 10px) rotate(-3deg); }
+    60% { transform: translate(5px, -10px) rotate(3deg); }
+    70% { transform: translate(-5px, -10px) rotate(-3deg); }
+    80% { transform: translate(5px, 10px) rotate(3deg); }
+    90% { transform: translate(-3px, 0) rotate(-1deg); }
+}
+
+/* 卡片入场动画 */
+@keyframes card-entrance {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px) scale(0.8);
+    }
+    50% {
+        transform: translateX(10px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes card-entrance-right {
+    0% {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+    }
+    50% {
+        transform: translateX(-10px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* 淡入上移动画 */
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 弹入动画 */
+@keyframes pop-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 旋转动画 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 脉冲缩放 */
+@keyframes pulse-scale {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* 彩虹边框 */
+@keyframes rainbow-border {
+    0% { border-color: #FF00FF; }
+    20% { border-color: #00FFFF; }
+    40% { border-color: #00FF00; }
+    60% { border-color: #FFFF00; }
+    80% { border-color: #FF8800; }
+    100% { border-color: #FF00FF; }
+}
+
+/* 闪光效果 */
+@keyframes flash {
+    0%, 100% { opacity: 1; filter: brightness(1); }
+    50% { opacity: 0.8; filter: brightness(1.5); }
+}
+
+/* 跑马灯 */
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* 打字机效果 */
+@keyframes typing {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+/* 光标闪烁 */
+@keyframes cursor-blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: currentColor; }
+}
+
+/* 烟花粒子动画 */
+@keyframes firework-particle {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}
+
+/* 飘浮文字 */
+@keyframes float-text {
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+/* 心跳效果 */
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.1); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+}
+
+/* 摇晃进入 */
+@keyframes wobble-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%) rotate(-30deg);
+    }
+    30% {
+        transform: translateX(20%) rotate(10deg);
+    }
+    50% {
+        transform: translateX(-10%) rotate(-5deg);
+    }
+    70% {
+        transform: translateX(5%) rotate(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* ==================== 动画类 ==================== */
+
+.animate-rainbow {
+    animation: rainbow-text 3s linear infinite;
+}
+
+.animate-blink {
+    animation: blink 1s step-end infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+.animate-shake {
+    animation: shake 0.5s infinite;
+}
+
+.animate-shake-hard {
+    animation: shake-hard 0.5s infinite;
+}
+
+.animate-spin {
+    animation: spin 2s linear infinite;
+}
+
+.animate-pulse {
+    animation: pulse-scale 1s ease-in-out infinite;
+}
+
+.animate-flash {
+    animation: flash 0.5s infinite;
+}
+
+.animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-float-text {
+    animation: float-text 3s ease-in-out infinite;
+}
+
+/* 延迟类 */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-900 { animation-delay: 0.9s; }
+.delay-1000 { animation-delay: 1s; }
+
+/* ==================== 滚动触发动画类 ==================== */
+
+/* 从左侧飞入 */
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s ease-out;
+}
+
+.slide-in-left.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 从右侧飞入 */
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.8s ease-out;
+}
+
+.slide-in-right.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 从底部飞入 */
+.slide-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.slide-in-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 缩放进入 */
+.scale-in {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.6s ease-out;
+}
+
+.scale-in.animate {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 旋转进入 */
+.rotate-in {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.5);
+    transition: all 0.8s ease-out;
+}
+
+.rotate-in.animate {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+/* 翻转进入 */
+.flip-in {
+    opacity: 0;
+    transform: perspective(400px) rotateY(-90deg);
+    transition: all 0.8s ease-out;
+}
+
+.flip-in.animate {
+    opacity: 1;
+    transform: perspective(400px) rotateY(0);
+}
+
+/* 摇晃进入 */
+.wobble-in {
+    animation: wobble-in 1s ease-out forwards;
+}
+
+/* 打字机效果 */
+.typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid currentColor;
+    animation: 
+        typing 3s steps(40) forwards,
+        cursor-blink 0.75s step-end infinite;
+}
+
+/* ==================== 特效类 ==================== */
+
+/* 彩虹边框 */
+.rainbow-border {
+    animation: rainbow-border 3s linear infinite;
+}
+
+/* 发光效果 */
+.glow {
+    box-shadow: 
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 30px currentColor;
+}
+
+.glow-magenta {
+    box-shadow: 0 0 20px #FF00FF, 0 0 40px #FF00FF;
+}
+
+.glow-cyan {
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+}
+
+.glow-yellow {
+    box-shadow: 0 0 20px #FFFF00, 0 0 40px #FFFF00;
+}
+
+/* 文字发光 */
+.text-glow {
+    text-shadow: 
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 30px currentColor,
+        0 0 40px currentColor;
+}
+
+/* 渐变文字 */
+.gradient-text {
+    background: linear-gradient(90deg, #FF00FF, #00FFFF, #FFFF00, #FF00FF);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s linear infinite;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+/* 3D 文字效果 */
+.text-3d {
+    text-shadow: 
+        1px 1px 0 #ccc,
+        2px 2px 0 #ccc,
+        3px 3px 0 #bbb,
+        4px 4px 0 #bbb,
+        5px 5px 0 #aaa,
+        6px 6px 0 #aaa,
+        7px 7px 0 #999,
+        8px 8px 0 #999,
+        9px 9px 0 #888,
+        10px 10px 0 #888,
+        11px 11px 10px rgba(0,0,0,0.5);
+}
+
+/* 扫描线效果 */
+.scanline {
+    position: relative;
+    overflow: hidden;
+}
+
+.scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5), transparent);
+    animation: scanline 2s linear infinite;
+}
+
+@keyframes scanline {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
+
+/* 故障效果 */
+.glitch {
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    color: #FF00FF;
+    animation: glitch-1 0.3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch::after {
+    color: #00FFFF;
+    animation: glitch-2 0.3s infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(3px, -3px); }
+    60% { transform: translate(-3px, -3px); }
+    80% { transform: translate(3px, 3px); }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(3px, -3px); }
+    40% { transform: translate(-3px, 3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(-3px, -3px); }
+}
+
+/* 粒子容器 */
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* 单个粒子 */
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* 星星闪烁 */
+.star-twinkle {
+    animation: twinkle 1s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.5); }
+}
+
+/* 波纹效果 */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple-effect 1s ease-out;
+}
+
+@keyframes ripple-effect {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* 震动效果（用于强调） */
+.vibrate {
+    animation: vibrate 0.3s linear infinite;
+}
+
+@keyframes vibrate {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
