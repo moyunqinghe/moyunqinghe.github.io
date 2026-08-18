@@ -33,15 +33,13 @@ body {
 ::selection { background: rgba(164, 85, 47, 0.2); }
 
 .page {
-  max-width: 40rem;
+  max-width: 26rem;
   margin: 0 auto;
   padding: clamp(2.5rem, 8vh, 5rem) 1.25rem 3rem;
 }
 
 /* ---------- 名片区 ---------- */
 .card {
-  max-width: 26rem;
-  margin: 0 auto;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 6px;
