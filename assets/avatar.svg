@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 暖纸水墨风占位头像：换成自己的照片时，替换整个文件即可 -->
+  <rect width="512" height="512" fill="#f3e9d7"/>
+  <circle cx="256" cy="256" r="200" fill="#efe2cb" opacity="0.6"/>
+  <text x="256" y="270"
+        font-family="'Songti SC', 'STSong', 'SimSun', serif"
+        font-size="230" font-weight="600"
+        fill="#3d2f1e" text-anchor="middle">墨</text>
+  <rect x="336" y="348" width="44" height="44" rx="6"
+        fill="#a4552f" opacity="0.85"/>
+</svg>
