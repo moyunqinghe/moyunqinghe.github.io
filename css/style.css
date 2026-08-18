@@ -26,9 +26,9 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  /* 一盏打在中上方的暖光，让纸面有明暗，不再是死平的纯色 */
+  /* 一盏暖光，位置由 JS 每次刷新轻微偏移；变量兜底保持默认 */
   background:
-    radial-gradient(58rem 40rem at 50% 16%,
+    radial-gradient(58rem 40rem at var(--glow-x, 50%) var(--glow-y, 16%),
                     rgba(216, 178, 128, 0.16),
                     transparent 62%),
     var(--paper);
@@ -156,6 +156,8 @@ body::before {
   border-radius: 6px;
   color: var(--ink);
   text-decoration: none;
+  /* 每条带着各自随性的小倾斜（JS 注入 --tilt） */
+  transform: rotate(var(--tilt, 0deg));
   transition: border-color 0.25s var(--ease-out),
               box-shadow 0.25s var(--ease-out),
               transform 0.25s var(--ease-out);
@@ -178,7 +180,7 @@ body::before {
 .contact-item:focus-visible {
   border-color: var(--accent);
   box-shadow: 0 6px 16px rgba(164, 85, 47, 0.12);
-  transform: translateY(-1px);
+  transform: rotate(var(--tilt, 0deg)) translateY(-1px);
 }
 
 .contact-item:hover::after,
@@ -191,7 +193,7 @@ body::before {
 .contact-item:focus-visible .platform { color: var(--accent); }
 
 /* 按下时的物理回馈 */
-.contact-item:active { transform: translateY(0); }
+.contact-item:active { transform: rotate(var(--tilt, 0deg)) translateY(0); }
 
 .contact-item:focus-visible {
   outline: 2px solid var(--accent);

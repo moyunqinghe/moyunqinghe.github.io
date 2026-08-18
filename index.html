@@ -57,16 +57,36 @@
        不引任何库，纯原生。关掉 JS 也有 CSS 兜底形状。 -->
   <script>
     (function () {
-      var card = document.querySelector('.card');
-      if (!card) return;
       function r(min, max) { return Math.round(min + Math.random() * (max - min)); }
-      // 横向更放纵、纵向略收敛，避免随机成正圆，保留"手裁"的不规则
-      var radius =
-        r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% / ' +
-        r(38, 62) + '% ' + r(38, 62) + '% ' + r(38, 62) + '% ' + r(38, 62) + '%';
-      card.style.borderRadius = radius;
-      var tilt = (Math.random() * 2 - 1) * 1.6; // -1.6° ~ +1.6°
-      card.style.setProperty('--tilt', tilt.toFixed(2) + 'deg');
+      function rf(min, max) { return +(min + Math.random() * (max - min)).toFixed(2); }
+      function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+      /* 名片：自由生长的有机形状 + 随性倾斜 */
+      var card = document.querySelector('.card');
+      if (card) {
+        card.style.borderRadius =
+          r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% / ' +
+          r(38, 62) + '% ' + r(38, 62) + '% ' + r(38, 62) + '% ' + r(38, 62) + '%';
+        card.style.setProperty('--tilt', rf(-1.6, 1.6) + 'deg');
+      }
+
+      /* 暖光：每次刷新轻微漂移 */
+      document.body.style.setProperty('--glow-x', r(38, 62) + '%');
+      document.body.style.setProperty('--glow-y', r(8, 26) + '%');
+
+      /* 找到我：三行各自一点手裁圆角 + 小倾斜 */
+      document.querySelectorAll('.contact-item').forEach(function (item) {
+        item.style.borderRadius =
+          r(8, 20) + 'px ' + r(8, 20) + 'px ' + r(8, 20) + 'px ' + r(8, 20) + 'px';
+        item.style.setProperty('--tilt', rf(-0.5, 0.5) + 'deg');
+      });
+
+      /* 名字：字重/字距轻微随机，像每次手写一遍 */
+      var name = document.querySelector('.name');
+      if (name) {
+        name.style.fontWeight = pick([500, 600, 700]);
+        name.style.letterSpacing = rf(0.05, 0.12) + 'em';
+      }
     })();
   </script>
 </body>
