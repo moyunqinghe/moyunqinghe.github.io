@@ -12,8 +12,15 @@
   --ink-soft: #8a7a5f;     /* 次级文字（灰褐） */
   --accent: #a4552f;       /* 链接 / 强调（赭石） */
   --line: #e7dcc8;         /* 细线 / 边框 */
-  --shadow: 0 1px 0 rgba(61, 47, 30, 0.03),
-            0 10px 30px rgba(61, 47, 30, 0.07);
+  /* 立体投影：顶部一道纸边高光 + 层层投下的暖褐阴影，像纸片浮在桌面上 */
+  --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                 0 2px 6px rgba(61, 47, 30, 0.08),
+                 0 14px 28px -10px rgba(61, 47, 30, 0.22),
+                 0 30px 60px -18px rgba(61, 47, 30, 0.26);
+  --shadow-item: 0 1px 2px rgba(61, 47, 30, 0.06),
+                 0 5px 12px -6px rgba(61, 47, 30, 0.16);
+  --shadow-item-hover: 0 2px 4px rgba(61, 47, 30, 0.08),
+                 0 10px 22px -8px rgba(61, 47, 30, 0.24);
 
   --serif: "Songti SC", "STSong", "Noto Serif CJK SC",
            "Source Han Serif SC", "SimSun", Georgia, serif;
@@ -53,6 +60,14 @@ body::before {
 
 ::selection { background: rgba(164, 85, 47, 0.2); }
 
+/* 跟随笔标的暖阳画布：只看不拦，悬浮于内容之上 */
+#sun {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+}
+
 .page {
   max-width: 26rem;
   width: 100%;
@@ -78,7 +93,7 @@ body::before {
   border: 1px solid var(--line);
   /* 有机形状兜底（JS 关闭时也好看）；JS 会在每次刷新时随机重掷 */
   border-radius: 58% 42% 47% 53% / 45% 58% 42% 55%;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
   padding: 2.75rem 1.75rem 2.5rem;
   text-align: center;
   /* 静止时也带着那点随性的倾斜（减弱动效下依然生效） */
@@ -156,6 +171,7 @@ body::before {
   border-radius: 6px;
   color: var(--ink);
   text-decoration: none;
+  box-shadow: var(--shadow-item);
   /* 每条带着各自随性的小倾斜（JS 注入 --tilt） */
   transform: rotate(var(--tilt, 0deg));
   transition: border-color 0.25s var(--ease-out),
@@ -179,8 +195,8 @@ body::before {
 .contact-item:hover,
 .contact-item:focus-visible {
   border-color: var(--accent);
-  box-shadow: 0 6px 16px rgba(164, 85, 47, 0.12);
-  transform: rotate(var(--tilt, 0deg)) translateY(-1px);
+  box-shadow: var(--shadow-item-hover);
+  transform: rotate(var(--tilt, 0deg)) translateY(-2px);
 }
 
 .contact-item:hover::after,
