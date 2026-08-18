@@ -40,19 +40,21 @@ body {
 
 /* ---------- 名片区 ---------- */
 .card {
+  max-width: 26rem;
+  margin: 0 auto;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 6px;
   box-shadow: var(--shadow);
-  padding: 3.5rem 2rem 3rem;
+  padding: 2.75rem 1.75rem 2.5rem;
   text-align: center;
 }
 
 .avatar {
   display: block;
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 1.5rem;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 1.25rem;
   border-radius: 50%;
   border: 1px solid var(--line);
 }
@@ -161,8 +163,8 @@ body {
 
 /* ---------- 移动端 ---------- */
 @media (max-width: 480px) {
-  .card { padding: 2.5rem 1.25rem 2rem; }
-  .avatar { width: 80px; height: 80px; }
+  .card { padding: 2.25rem 1.25rem 2rem; }
+  .avatar { width: 76px; height: 76px; }
   .contact { margin-top: 2.5rem; }
   .footer { margin-top: 3rem; }
 }
