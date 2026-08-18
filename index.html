@@ -52,5 +52,22 @@
       <p>© 2026 墨韵清河</p>
     </footer>
   </main>
+
+  <!-- 边框随心：每次刷新随机生长一个有机形状 + 一点随性的倾斜。
+       不引任何库，纯原生。关掉 JS 也有 CSS 兜底形状。 -->
+  <script>
+    (function () {
+      var card = document.querySelector('.card');
+      if (!card) return;
+      function r(min, max) { return Math.round(min + Math.random() * (max - min)); }
+      // 横向更放纵、纵向略收敛，避免随机成正圆，保留"手裁"的不规则
+      var radius =
+        r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% / ' +
+        r(38, 62) + '% ' + r(38, 62) + '% ' + r(38, 62) + '% ' + r(38, 62) + '%';
+      card.style.borderRadius = radius;
+      var tilt = (Math.random() * 2 - 1) * 1.6; // -1.6° ~ +1.6°
+      card.style.setProperty('--tilt', tilt.toFixed(2) + 'deg');
+    })();
+  </script>
 </body>
 </html>
