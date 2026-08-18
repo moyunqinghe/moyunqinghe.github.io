@@ -142,32 +142,11 @@
         document.addEventListener('pointerleave', function () { glow.on = false; last = null; });
       }
 
-      /* ---------- 随机墨雨 ---------- */
+      /* ---------- 随机墨雨：风向每次刷新随机，本会话内保持 ---------- */
       var drops = [];
       var intensity = 0.35, targetIntensity = 0.35;  /* 雨量：慢慢在大小之间漂移 */
-      var wind = 0.6, targetWind = 0.6;               /* 风向：偶尔换 */
-
-      /* ---------- 重力：手机上倾斜决定风向 ---------- */
-      var coarse = matchMedia('(pointer: coarse)').matches;
-      var tiltActive = false;
-      function onTilt(e) {
-        if (e.gamma == null) return;
-        tiltActive = true;
-        targetWind = Math.max(-3, Math.min(3, e.gamma * 0.12));  /* 顺势而倒 */
-      }
-      if (coarse) {
-        addEventListener('deviceorientation', onTilt);
-        /* iOS 13+ 须在用户手势里授权，首次触摸时申请 */
-        addEventListener('pointerdown', function once() {
-          removeEventListener('pointerdown', once);
-          if (typeof DeviceOrientationEvent !== 'undefined' &&
-              typeof DeviceOrientationEvent.requestPermission === 'function') {
-            DeviceOrientationEvent.requestPermission().then(function (s) {
-              if (s !== 'granted') removeEventListener('deviceorientation', onTilt);
-            }).catch(function () {});
-          }
-        });
-      }
+      var targetWind = (Math.random() * 2 - 1) * 2;  /* 每次刷新随机一个风向 */
+      var wind = targetWind;
       function newDrop(prefill) {
         return {
           x: Math.random() * (innerWidth + 80) - 40,
@@ -208,11 +187,9 @@
         }
         ctx.globalAlpha = 1;
 
-        /* 墨雨：强度随机漂移；风向在没感应时随机、有感应时跟手 */
+        /* 墨雨：雨量随机漂移；风向本会话保持（每次刷新已随机） */
         if (Math.random() < 0.005) targetIntensity = Math.random() * 0.8 + 0.1;
-        if (!tiltActive && Math.random() < 0.004) targetWind = (Math.random() * 2 - 1) * 1.6;
         intensity += (targetIntensity - intensity) * 0.01;
-        wind += (targetWind - wind) * (tiltActive ? 0.08 : 0.01);
         var rate = intensity * 3;
         var n = Math.floor(rate) + (Math.random() < rate % 1 ? 1 : 0);
         for (var s = 0; s < n; s++) drops.push(newDrop(false));
