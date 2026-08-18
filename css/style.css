@@ -1,6 +1,7 @@
 /* ============================================================
    墨韵清河 · 个人主页 —— 暖纸文艺风
    配色：米白纸底 / 深褐墨字 / 赭石点缀
+   质感：纸纹肌理 + 中央暖光 + 入场渐显 + hover 反馈
    ============================================================ */
 
 /* ---------- 设计变量 ---------- */
@@ -17,26 +18,58 @@
   --serif: "Songti SC", "STSong", "Noto Serif CJK SC",
            "Source Han Serif SC", "SimSun", Georgia, serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ---------- 基础 ---------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--paper);
+  /* 一盏打在中上方的暖光，让纸面有明暗，不再是死平的纯色 */
+  background:
+    radial-gradient(58rem 40rem at 50% 16%,
+                    rgba(216, 178, 128, 0.16),
+                    transparent 62%),
+    var(--paper);
   color: var(--ink);
   font-family: var(--serif);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  /* 垂直居中：内容矮时上下均分留白，内容高时自然滚动 */
+  min-height: 100dvh;
+  display: flex;
+}
+
+/* 纸纹肌理：固定在视口、不随滚动重绘、不拦交互 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
 }
 
 ::selection { background: rgba(164, 85, 47, 0.2); }
 
 .page {
   max-width: 26rem;
-  margin: 0 auto;
-  padding: clamp(2.5rem, 8vh, 5rem) 1.25rem 3rem;
+  width: 100%;
+  /* flex 子项 margin:auto：水平+垂直居中，且内容超高时不会被裁顶 */
+  margin: auto;
+  padding: 3rem 1.25rem;
 }
+
+/* ---------- 入场渐显（有叙事顺序：名片 → 联系 → 页脚） ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card    { animation: rise 0.7s var(--ease-out) both; }
+.contact { animation: rise 0.7s var(--ease-out) 0.12s both; }
+.footer  { animation: rise 0.7s var(--ease-out) 0.22s both; }
 
 /* ---------- 名片区 ---------- */
 .card {
@@ -50,11 +83,12 @@ body {
 
 .avatar {
   display: block;
-  width: 88px;
-  height: 88px;
+  width: 92px;
+  height: 92px;
   margin: 0 auto 1.25rem;
   border-radius: 50%;
   border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(61, 47, 30, 0.08);
 }
 
 .name {
@@ -74,11 +108,8 @@ body {
   margin-top: 1.25rem;
   color: var(--accent);
   font-size: 0.95rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
 }
-
-.motto::before { content: "—— "; letter-spacing: 0; }
-.motto::after  { content: " ——"; letter-spacing: 0; }
 
 /* ---------- 找到我 ---------- */
 .contact { margin-top: 3.5rem; }
@@ -109,29 +140,54 @@ body {
 }
 
 .contact-item {
+  position: relative;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.25rem 1rem;
-  padding: 0.9rem 1.25rem;
+  padding: 0.9rem 2.5rem 0.9rem 1.25rem;   /* 右侧留白给浮现的箭头 */
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 6px;
   color: var(--ink);
   text-decoration: none;
-  transition: border-color 0.2s ease,
-              box-shadow 0.2s ease,
-              transform 0.2s ease;
+  transition: border-color 0.25s var(--ease-out),
+              box-shadow 0.25s var(--ease-out),
+              transform 0.25s var(--ease-out);
 }
 
-.contact-item:hover {
+/* hover：边框转赭石、轻抬，右侧浮现一个箭头作为"可点"的反馈 */
+.contact-item::after {
+  content: "\2192";            /* → */
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  color: var(--accent);
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  transition: opacity 0.25s var(--ease-out),
+              transform 0.25s var(--ease-out);
+}
+
+.contact-item:hover,
+.contact-item:focus-visible {
   border-color: var(--accent);
-  box-shadow: 0 6px 16px rgba(164, 85, 47, 0.1);
+  box-shadow: 0 6px 16px rgba(164, 85, 47, 0.12);
   transform: translateY(-1px);
 }
 
-.contact-item:hover .platform { color: var(--accent); }
+.contact-item:hover::after,
+.contact-item:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.contact-item:hover .platform,
+.contact-item:focus-visible .platform { color: var(--accent); }
+
+/* 按下时的物理回馈 */
+.contact-item:active { transform: translateY(0); }
 
 .contact-item:focus-visible {
   outline: 2px solid var(--accent);
@@ -162,7 +218,14 @@ body {
 /* ---------- 移动端 ---------- */
 @media (max-width: 480px) {
   .card { padding: 2.25rem 1.25rem 2rem; }
-  .avatar { width: 76px; height: 76px; }
+  .avatar { width: 78px; height: 78px; }
   .contact { margin-top: 2.5rem; }
   .footer { margin-top: 3rem; }
+}
+
+/* ---------- 减弱动效：一切归零 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card, .contact, .footer { animation: none; }
+  .contact-item,
+  .contact-item::after { transition: none; }
 }
