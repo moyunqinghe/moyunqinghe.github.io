@@ -247,5 +247,15 @@
       });
     })();
   </script>
+
+  <!-- 左键：禁止拖选与复制，全程静默（不弹警告） -->
+  <script>
+    (function () {
+      function stop(e) { e.preventDefault(); }
+      document.addEventListener('selectstart', stop);
+      document.addEventListener('copy', stop);
+      document.addEventListener('cut', stop);
+    })();
+  </script>
 </body>
 </html>

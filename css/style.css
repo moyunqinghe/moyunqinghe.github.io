@@ -43,6 +43,9 @@ body {
   font-family: var(--serif);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  /* 左键拖不选、文字抄不走（静默，不弹警告） */
+  -webkit-user-select: none;
+  user-select: none;
   /* 垂直居中：内容矮时上下均分留白，内容高时自然滚动 */
   min-height: 100dvh;
   display: flex;
