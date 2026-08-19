@@ -16,6 +16,9 @@
   <!-- 暖阳画布：光标所至，光与微尘随行 -->
   <canvas id="sun" aria-hidden="true"></canvas>
 
+  <!-- 右键警告小纸片 -->
+  <div id="warn" class="warn" role="status" aria-live="polite"></div>
+
   <main class="page">
     <!-- 名片区 -->
     <header class="card">
@@ -212,6 +215,36 @@
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <!-- 右键：不弹菜单，蹦出一个不规则的随机警告 -->
+  <script>
+    (function () {
+      var texts = ['右键被没收了', '这里不兴右键', '嘘，别闹', '右键？不存在的', '这页只看不摸', '手下留情'];
+      var warn = document.getElementById('warn');
+      var timer = null;
+      function r(min, max) { return Math.round(min + Math.random() * (max - min)); }
+      function rf(min, max) { return +(min + Math.random() * (max - min)).toFixed(2); }
+
+      document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        warn.textContent = texts[Math.floor(Math.random() * texts.length)];
+        /* 不规则随机形状 + 随机倾斜 */
+        warn.style.borderRadius =
+          r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% ' + r(30, 70) + '% / ' +
+          r(40, 60) + '% ' + r(40, 60) + '% ' + r(40, 60) + '% ' + r(40, 60) + '%';
+        warn.style.setProperty('--tilt', rf(-7, 7) + 'deg');
+        /* 贴着点击处蹦出，钳进视口 */
+        var w = warn.offsetWidth, h = warn.offsetHeight;
+        var x = Math.min(Math.max(8, e.clientX - w / 2), innerWidth - w - 8);
+        var y = Math.min(Math.max(8, e.clientY - h - 14), innerHeight - h - 8);
+        warn.style.left = x + 'px';
+        warn.style.top = y + 'px';
+        warn.classList.add('show');
+        clearTimeout(timer);
+        timer = setTimeout(function () { warn.classList.remove('show'); }, 1500);
+      });
     })();
   </script>
 </body>

@@ -68,6 +68,29 @@ body::before {
   z-index: 60;
 }
 
+/* 右键警告：不规则手裁小纸片，蹦出来又自己消失 */
+.warn {
+  position: fixed;
+  z-index: 70;
+  padding: 0.7rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  box-shadow: var(--shadow-item-hover);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8) rotate(var(--tilt, 0deg));
+  transition: opacity 0.25s var(--ease-out),
+              transform 0.25s var(--ease-out);
+}
+
+.warn.show {
+  opacity: 1;
+  transform: scale(1) rotate(var(--tilt, 0deg));
+}
+
 .page {
   max-width: 26rem;
   width: 100%;
@@ -249,5 +272,6 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .card, .contact, .footer { animation: none; }
   .contact-item,
-  .contact-item::after { transition: none; }
+  .contact-item::after,
+  .warn { transition: none; }
 }
