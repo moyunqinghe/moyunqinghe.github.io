@@ -2,6 +2,8 @@
 
 纯静态、无框架、无构建的单页个人主页。暖纸文艺风。
 
+**线上地址**：<https://moyunqinghe.github.io>（GitHub Pages，main 分支自动部署）
+
 ## 目录结构
 
 ```
