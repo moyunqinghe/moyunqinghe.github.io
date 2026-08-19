@@ -22,7 +22,7 @@
   <main class="page">
     <!-- 名片区 -->
     <header class="card">
-      <img class="avatar" src="assets/avatar.svg" alt="墨韵清河的头像">
+      <img class="avatar" src="assets/avatar.svg" alt="墨韵清河的头像" draggable="false">
       <h1 class="name">墨韵清河</h1>
       <p class="role">AI Agent 工程师</p>
       <p class="motto">喜欢就去做</p>
@@ -255,6 +255,7 @@
       document.addEventListener('selectstart', stop);
       document.addEventListener('copy', stop);
       document.addEventListener('cut', stop);
+      document.addEventListener('dragstart', stop);   /* 头像/图片按住也拖不走 */
     })();
   </script>
 </body>

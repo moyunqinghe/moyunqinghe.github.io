@@ -63,6 +63,8 @@ body::before {
 
 ::selection { background: rgba(164, 85, 47, 0.2); }
 
+img { -webkit-user-drag: none; }   /* Safari 图片不可拖拽 */
+
 /* 跟随笔标的暖阳画布：只看不拦，悬浮于内容之上 */
 #sun {
   position: fixed;
